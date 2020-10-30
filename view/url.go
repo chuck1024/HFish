@@ -1,16 +1,16 @@
 package view
 
 import (
+	"HFish/utils/cors"
 	"HFish/view/api"
-	"HFish/view/dashboard"
-	"HFish/view/fish"
-	"HFish/view/mail"
 	"HFish/view/colony"
+	"HFish/view/dashboard"
+	"HFish/view/data"
+	"HFish/view/fish"
+	"HFish/view/login"
+	"HFish/view/mail"
 	"HFish/view/setting"
 	"github.com/gin-gonic/gin"
-	"HFish/view/login"
-	"HFish/utils/cors"
-	"HFish/view/data"
 )
 
 func LoadUrl(r *gin.Engine) {

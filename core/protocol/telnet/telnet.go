@@ -1,21 +1,21 @@
 package telnet
 
 import (
-	"net"
-	"fmt"
-	"bufio"
-	"strings"
-	"os"
-	"HFish/utils/is"
-	"HFish/core/rpc/client"
-	"HFish/core/report"
-	"HFish/utils/log"
-	"github.com/bitly/go-simplejson"
-	"HFish/utils/json"
-	"HFish/utils/file"
-	"strconv"
-	"time"
 	"HFish/core/pool"
+	"HFish/core/report"
+	"HFish/core/rpc/client"
+	"HFish/utils/file"
+	"HFish/utils/is"
+	"HFish/utils/json"
+	"HFish/utils/log"
+	"bufio"
+	"fmt"
+	"github.com/bitly/go-simplejson"
+	"net"
+	"os"
+	"strconv"
+	"strings"
+	"time"
 )
 
 // 服务端连接
@@ -100,7 +100,7 @@ func handleSession(conn net.Conn, exitChan chan int, id string) {
 
 			fileName := res.Get("command").Get(str).MustString()
 
-			if (fileName == "") {
+			if fileName == "" {
 				fileName = res.Get("command").Get("default").MustString()
 			}
 

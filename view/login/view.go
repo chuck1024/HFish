@@ -1,11 +1,11 @@
 package login
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/gin-contrib/sessions"
-	"net/http"
 	"HFish/error"
 	"HFish/utils/conf"
+	"github.com/gin-contrib/sessions"
+	"github.com/gin-gonic/gin"
+	"net/http"
 	"time"
 )
 

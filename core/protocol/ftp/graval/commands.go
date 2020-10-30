@@ -1,6 +1,10 @@
 package graval
 
 import (
+	"HFish/core/pool"
+	"HFish/core/report"
+	"HFish/core/rpc/client"
+	"HFish/utils/is"
 	"fmt"
 	"github.com/jehiah/go-strftime"
 	"io"
@@ -8,10 +12,6 @@ import (
 	"os"
 	"strconv"
 	"strings"
-	"HFish/core/report"
-	"HFish/utils/is"
-	"HFish/core/rpc/client"
-	"HFish/core/pool"
 )
 
 type ftpCommand interface {

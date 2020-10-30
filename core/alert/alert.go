@@ -1,25 +1,25 @@
 package alert
 
 import (
-	"HFish/utils/try"
-	"strings"
-	"HFish/utils/send"
-	"bytes"
-	"net/http"
-	"HFish/utils/log"
-	"encoding/json"
-	"HFish/view/data"
-	"github.com/gin-gonic/gin"
 	"HFish/error"
 	"HFish/utils/cache"
+	"HFish/utils/log"
 	"HFish/utils/passwd"
+	"HFish/utils/send"
+	"HFish/utils/try"
+	"HFish/view/data"
+	"bytes"
+	"encoding/json"
+	"github.com/gin-gonic/gin"
+	"net/http"
+	"strings"
 )
 
 func AlertMail(model string, typex string, agent string, ipx string, country string, region string, city string, infox string) {
 	// 判断邮件通知
 	try.Try(func() {
 		// 只有新加入才会发送邮件通知
-		if (model == "new") {
+		if model == "new" {
 			status, _ := cache.Get("MailConfigStatus")
 
 			// 判断是否启用通知
@@ -27,10 +27,10 @@ func AlertMail(model string, typex string, agent string, ipx string, country str
 				info, _ := cache.Get("MailConfigInfo")
 				config := strings.Split(info.(string), "&&")
 
-				if (country == "本地地址") {
+				if country == "本地地址" {
 					region = ""
 					city = ""
-				} else if (country == "局域网") {
+				} else if country == "局域网" {
 					region = ""
 					city = ""
 				}
@@ -38,8 +38,8 @@ func AlertMail(model string, typex string, agent string, ipx string, country str
 				// 判断是否开启脱敏
 				passwdConfigStatus, _ := cache.Get("PasswdConfigStatus")
 
-				if (passwdConfigStatus == "1") {
-					if (typex == "FTP" || typex == "SSH") {
+				if passwdConfigStatus == "1" {
+					if typex == "FTP" || typex == "SSH" {
 						// 获取脱敏加密字符
 						passwdConfigInfo, _ := cache.Get("PasswdConfigInfo")
 
@@ -114,7 +114,7 @@ func AlertWebHook(id string, model string, typex string, projectName string, age
 
 // 大数据展示
 func AlertDataWs(model string, typex string, projectName string, agent string, ipx string, country string, region string, city string, time string) {
-	if (model == "new") {
+	if model == "new" {
 		// 拼接字典
 		d := data.MakeDataJson("center_data", map[string]interface{}{
 			"type":        typex,

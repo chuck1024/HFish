@@ -1,16 +1,16 @@
 package api
 
 import (
-	"github.com/gin-gonic/gin"
+	"HFish/core/dbUtil"
 	"HFish/core/report"
-	"net/http"
+	"HFish/core/rpc/client"
 	"HFish/error"
 	"HFish/utils/conf"
-	"HFish/core/dbUtil"
-	"HFish/core/rpc/client"
 	"HFish/utils/is"
 	"HFish/utils/log"
 	"fmt"
+	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 // 上报WEB蜜罐
@@ -20,7 +20,7 @@ func ReportWeb(c *gin.Context) {
 	secKey := c.PostForm("sec_key")
 	ip := c.ClientIP()
 
-	if (ip == "::1") {
+	if ip == "::1" {
 		ip = "127.0.0.1"
 	}
 
@@ -56,7 +56,7 @@ func ReportDeepWeb(c *gin.Context) {
 	secKey := c.PostForm("sec_key")
 	ip := c.ClientIP()
 
-	if (ip == "::1") {
+	if ip == "::1" {
 		ip = "127.0.0.1"
 	}
 

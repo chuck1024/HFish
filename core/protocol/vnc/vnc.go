@@ -1,15 +1,15 @@
 package vnc
 
 import (
+	"HFish/core/pool"
+	"HFish/core/report"
+	"HFish/core/rpc/client"
+	"HFish/utils/is"
+	"fmt"
 	"io"
 	"log"
 	"net"
-	"fmt"
 	"strings"
-	"HFish/utils/is"
-	"HFish/core/rpc/client"
-	"HFish/core/report"
-	"HFish/core/pool"
 )
 
 const VERSION = "RFB 003.008\n"
@@ -44,7 +44,7 @@ func Start(address string) {
 				go report.ReportVnc("VNC蜜罐", "本机", arr[0], "存在VNC扫描！")
 			}
 
-			go handle(c, )
+			go handle(c)
 
 			wg.Done()
 		})
@@ -184,7 +184,7 @@ func handle(c net.Conn) {
 	/* Tell client auth failed */
 	c.Write(append(
 		[]byte{
-			0, 0, 0, 1,  /* Failure word */
+			0, 0, 0, 1, /* Failure word */
 			0, 0, 0, 29, /* Message length */
 		},
 		/* Failure message */

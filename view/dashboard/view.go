@@ -1,14 +1,14 @@
 package dashboard
 
 import (
+	"HFish/core/dbUtil"
+	"HFish/error"
+	"HFish/utils/cache"
+	"HFish/utils/conf"
+	"HFish/utils/log"
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"HFish/core/dbUtil"
-	"HFish/utils/conf"
 	"strconv"
-	"HFish/error"
-	"HFish/utils/log"
-	"HFish/utils/cache"
 )
 
 func Html(c *gin.Context) {

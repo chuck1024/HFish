@@ -1,17 +1,17 @@
 package report
 
 import (
-	"HFish/core/dbUtil"
-	"time"
-	"HFish/utils/log"
-	"HFish/utils/ip"
-	"strconv"
-	"HFish/utils/try"
-	"strings"
 	"HFish/core/alert"
-	"HFish/utils/conf"
+	"HFish/core/dbUtil"
 	"HFish/core/pool"
 	"HFish/utils/cache"
+	"HFish/utils/conf"
+	"HFish/utils/ip"
+	"HFish/utils/log"
+	"HFish/utils/try"
+	"strconv"
+	"strings"
+	"time"
 )
 
 type HFishInfo struct {
@@ -103,7 +103,7 @@ func isWhiteIp(ip string) bool {
 			ipArr := strings.Split(info.(string), "&&")
 
 			for _, val := range ipArr {
-				if (ip == val) {
+				if ip == val {
 					isWhite = true
 				}
 			}
@@ -201,7 +201,7 @@ func updateInfo(id string, info string) {
 // 上报 WEB
 func ReportWeb(projectName string, agent string, ipx string, info string) {
 	// IP 不在白名单，进行上报
-	if (isWhiteIp(ipx) == false) {
+	if isWhiteIp(ipx) == false {
 		country, region, city := ip.GetIp(ipx)
 		id := insertInfo("WEB", projectName, agent, ipx, country, region, city, info)
 
@@ -216,7 +216,7 @@ func ReportWeb(projectName string, agent string, ipx string, info string) {
 // 上报 暗网 WEB
 func ReportDeepWeb(projectName string, agent string, ipx string, info string) {
 	// IP 不在白名单，进行上报
-	if (isWhiteIp(ipx) == false) {
+	if isWhiteIp(ipx) == false {
 		country, region, city := ip.GetIp(ipx)
 
 		// 插入账号密码
@@ -231,7 +231,7 @@ func ReportDeepWeb(projectName string, agent string, ipx string, info string) {
 // 上报 蜜罐插件
 func ReportPlugWeb(projectName string, agent string, ipx string, info string) {
 	// IP 不在白名单，进行上报
-	if (isWhiteIp(ipx) == false) {
+	if isWhiteIp(ipx) == false {
 		country, region, city := ip.GetIp(ipx)
 		id := insertInfo("PLUG", projectName, agent, ipx, country, region, city, info)
 		go alertx(strconv.FormatInt(id, 10), "new", "PLUG", projectName, agent, ipx, country, region, city, info, time.Now().Format("2006-01-02 15:04:05"))
@@ -247,7 +247,7 @@ func ReportSSH(ipx string, agent string, info string) int64 {
 	}()
 
 	// IP 不在白名单，进行上报
-	if (isWhiteIp(ipx) == false) {
+	if isWhiteIp(ipx) == false {
 		country, region, city := ip.GetIp(ipx)
 		id := insertInfo("SSH", "SSH蜜罐", agent, ipx, country, region, city, info)
 
@@ -263,7 +263,7 @@ func ReportSSH(ipx string, agent string, info string) int64 {
 
 // 更新 SSH 操作
 func ReportUpdateSSH(id string, info string) {
-	if (id != "0") {
+	if id != "0" {
 		go updateInfo(id, info)
 		go alertx(id, "update", "SSH", "SSH蜜罐", "", "", "", "", "", info, time.Now().Format("2006-01-02 15:04:05"))
 	}
@@ -272,7 +272,7 @@ func ReportUpdateSSH(id string, info string) {
 // 上报 Redis
 func ReportRedis(ipx string, agent string, info string) int64 {
 	// IP 不在白名单，进行上报
-	if (isWhiteIp(ipx) == false) {
+	if isWhiteIp(ipx) == false {
 		country, region, city := ip.GetIp(ipx)
 		id := insertInfo("REDIS", "Redis蜜罐", agent, ipx, country, region, city, info)
 		go alertx(strconv.FormatInt(id, 10), "new", "REDIS", "Redis蜜罐", agent, ipx, country, region, city, info, time.Now().Format("2006-01-02 15:04:05"))
@@ -283,7 +283,7 @@ func ReportRedis(ipx string, agent string, info string) int64 {
 
 // 更新 Redis 操作
 func ReportUpdateRedis(id string, info string) {
-	if (id != "0") {
+	if id != "0" {
 		go updateInfo(id, info)
 		go alertx(id, "update", "REDIS", "Redis蜜罐", "", "", "", "", "", info, time.Now().Format("2006-01-02 15:04:05"))
 	}
@@ -292,7 +292,7 @@ func ReportUpdateRedis(id string, info string) {
 // 上报 Mysql
 func ReportMysql(ipx string, agent string, info string) int64 {
 	// IP 不在白名单，进行上报
-	if (isWhiteIp(ipx) == false) {
+	if isWhiteIp(ipx) == false {
 		country, region, city := ip.GetIp(ipx)
 		id := insertInfo("MYSQL", "Mysql蜜罐", agent, ipx, country, region, city, info)
 		go alertx(strconv.FormatInt(id, 10), "new", "MYSQL", "Mysql蜜罐", agent, ipx, country, region, city, info, time.Now().Format("2006-01-02 15:04:05"))
@@ -303,7 +303,7 @@ func ReportMysql(ipx string, agent string, info string) int64 {
 
 // 更新 Mysql 操作
 func ReportUpdateMysql(id string, info string) {
-	if (id != "0") {
+	if id != "0" {
 		go updateInfo(id, info)
 		go alertx(id, "update", "MYSQL", "Mysql蜜罐", "", "", "", "", "", info, time.Now().Format("2006-01-02 15:04:05"))
 	}
@@ -311,7 +311,7 @@ func ReportUpdateMysql(id string, info string) {
 
 // 上报 FTP
 func ReportFTP(ipx string, agent string, info string) {
-	if (isWhiteIp(ipx) == false) {
+	if isWhiteIp(ipx) == false {
 		country, region, city := ip.GetIp(ipx)
 		id := insertInfo("FTP", "FTP蜜罐", agent, ipx, country, region, city, info)
 
@@ -325,7 +325,7 @@ func ReportFTP(ipx string, agent string, info string) {
 
 // 上报 Telnet
 func ReportTelnet(ipx string, agent string, info string) int64 {
-	if (isWhiteIp(ipx) == false) {
+	if isWhiteIp(ipx) == false {
 		country, region, city := ip.GetIp(ipx)
 		id := insertInfo("TELNET", "Telnet蜜罐", agent, ipx, country, region, city, info)
 		go alertx(strconv.FormatInt(id, 10), "new", "TELNET", "Telnet蜜罐", agent, ipx, country, region, city, info, time.Now().Format("2006-01-02 15:04:05"))
@@ -336,7 +336,7 @@ func ReportTelnet(ipx string, agent string, info string) int64 {
 
 // 更新 Telnet 操作
 func ReportUpdateTelnet(id string, info string) {
-	if (id != "0") {
+	if id != "0" {
 		go updateInfo(id, info)
 		go alertx(id, "update", "TELNET", "Telnet蜜罐", "", "", "", "", "", info, time.Now().Format("2006-01-02 15:04:05"))
 	}
@@ -344,7 +344,7 @@ func ReportUpdateTelnet(id string, info string) {
 
 // 上报 MemCache
 func ReportMemCche(ipx string, agent string, info string) int64 {
-	if (isWhiteIp(ipx) == false) {
+	if isWhiteIp(ipx) == false {
 		country, region, city := ip.GetIp(ipx)
 		id := insertInfo("MEMCACHE", "MemCache蜜罐", agent, ipx, country, region, city, info)
 		go alertx(strconv.FormatInt(id, 10), "new", "MEMCACHE", "MemCache蜜罐", agent, ipx, country, region, city, info, time.Now().Format("2006-01-02 15:04:05"))
@@ -355,7 +355,7 @@ func ReportMemCche(ipx string, agent string, info string) int64 {
 
 // 更新 MemCache 操作
 func ReportUpdateMemCche(id string, info string) {
-	if (id != "0") {
+	if id != "0" {
 		go updateInfo(id, info)
 		go alertx(id, "update", "MEMCACHE", "MemCache蜜罐", "", "", "", "", "", info, time.Now().Format("2006-01-02 15:04:05"))
 	}
@@ -364,7 +364,7 @@ func ReportUpdateMemCche(id string, info string) {
 // 上报 HTTP 代理
 func ReportHttp(projectName string, agent string, ipx string, info string) {
 	// IP 不在白名单，进行上报
-	if (isWhiteIp(ipx) == false) {
+	if isWhiteIp(ipx) == false {
 		country, region, city := ip.GetIp(ipx)
 		id := insertInfo("HTTP", projectName, agent, ipx, country, region, city, info)
 		go alertx(strconv.FormatInt(id, 10), "new", "HTTP", projectName, agent, ipx, country, region, city, info, time.Now().Format("2006-01-02 15:04:05"))
@@ -374,7 +374,7 @@ func ReportHttp(projectName string, agent string, ipx string, info string) {
 // 上报 ES
 func ReportEs(projectName string, agent string, ipx string, info string) {
 	// IP 不在白名单，进行上报
-	if (isWhiteIp(ipx) == false) {
+	if isWhiteIp(ipx) == false {
 		country, region, city := ip.GetIp(ipx)
 		id := insertInfo("ES", projectName, agent, ipx, country, region, city, info)
 		go alertx(strconv.FormatInt(id, 10), "new", "ES", projectName, agent, ipx, country, region, city, info, time.Now().Format("2006-01-02 15:04:05"))
@@ -384,7 +384,7 @@ func ReportEs(projectName string, agent string, ipx string, info string) {
 // 上报 VNC
 func ReportVnc(projectName string, agent string, ipx string, info string) {
 	// IP 不在白名单，进行上报
-	if (isWhiteIp(ipx) == false) {
+	if isWhiteIp(ipx) == false {
 		country, region, city := ip.GetIp(ipx)
 		id := insertInfo("VNC", projectName, agent, ipx, country, region, city, info)
 		go alertx(strconv.FormatInt(id, 10), "new", "VNC", projectName, agent, ipx, country, region, city, info, time.Now().Format("2006-01-02 15:04:05"))
@@ -393,7 +393,7 @@ func ReportVnc(projectName string, agent string, ipx string, info string) {
 
 // 上报 TFTP
 func ReportTFtp(ipx string, agent string, info string) int64 {
-	if (isWhiteIp(ipx) == false) {
+	if isWhiteIp(ipx) == false {
 		country, region, city := ip.GetIp(ipx)
 		id := insertInfo("TFTP", "TFTP蜜罐", agent, ipx, country, region, city, info)
 		go alertx(strconv.FormatInt(id, 10), "new", "TFTP", "TFTP蜜罐", agent, ipx, country, region, city, info, time.Now().Format("2006-01-02 15:04:05"))
@@ -404,7 +404,7 @@ func ReportTFtp(ipx string, agent string, info string) int64 {
 
 // 更新 TFTP 操作
 func ReportUpdateTFtp(id string, info string) {
-	if (id != "0") {
+	if id != "0" {
 		go updateInfo(id, info)
 		go alertx(id, "update", "TFTP", "TFTP蜜罐", "", "", "", "", "", info, time.Now().Format("2006-01-02 15:04:05"))
 	}
@@ -413,7 +413,7 @@ func ReportUpdateTFtp(id string, info string) {
 // 上报 自定义蜜罐
 func ReportCustom(projectName string, agent string, ipx string, info string) {
 	// IP 不在白名单，进行上报
-	if (isWhiteIp(ipx) == false) {
+	if isWhiteIp(ipx) == false {
 		country, region, city := ip.GetIp(ipx)
 		id := insertInfo("CUSTOM", projectName, agent, ipx, country, region, city, info)
 		go alertx(strconv.FormatInt(id, 10), "new", "CUSTOM", projectName, agent, ipx, country, region, city, info, time.Now().Format("2006-01-02 15:04:05"))

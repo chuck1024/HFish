@@ -1,9 +1,9 @@
 package conf
 
 import (
-	"gopkg.in/ini.v1"
 	"HFish/utils/log"
 	"container/list"
+	"gopkg.in/ini.v1"
 )
 
 var cfg *ini.File

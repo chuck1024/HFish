@@ -1,19 +1,19 @@
 package mysql
 
 import (
+	"HFish/core/pool"
+	"HFish/core/report"
+	"HFish/core/rpc/client"
+	"HFish/error"
+	"HFish/utils/is"
+	"HFish/utils/log"
+	"HFish/utils/try"
 	"bytes"
 	"encoding/binary"
 	"net"
-	"syscall"
-	"strings"
-	"HFish/error"
-	"HFish/core/report"
-	"HFish/utils/try"
-	"HFish/utils/log"
-	"HFish/utils/is"
-	"HFish/core/rpc/client"
 	"strconv"
-	"HFish/core/pool"
+	"strings"
+	"syscall"
 	"time"
 )
 
@@ -109,7 +109,7 @@ func connectionClientHandler(conn net.Conn) {
 		error.Check(err, "")
 
 		//第二个包
-		_, err = conn.Read(ibuf[0: bufLength-1])
+		_, err = conn.Read(ibuf[0 : bufLength-1])
 
 		//判断是否有Can Use LOAD DATA LOCAL标志，如果有才支持读取文件
 		if (uint8(ibuf[4]) & uint8(128)) == 0 {
@@ -120,7 +120,7 @@ func connectionClientHandler(conn net.Conn) {
 		_, err = conn.Write(OkData)
 
 		//第四个包
-		_, err = conn.Read(ibuf[0: bufLength-1])
+		_, err = conn.Read(ibuf[0 : bufLength-1])
 
 		//这里根据客户端连接的次数来选择读取文件列表里面的第几个文件
 		ip, _, _ := net.SplitHostPort(conn.RemoteAddr().String())

@@ -1,38 +1,38 @@
 package setting
 
 import (
-	"HFish/core/exec"
-	"HFish/utils/color"
-	"HFish/view"
-	"fmt"
-	"github.com/gin-gonic/gin"
-	"io"
-	"os"
-	"net/http"
-	"time"
-	"HFish/utils/cache"
-	"HFish/utils/conf"
-	"HFish/core/protocol/ssh"
-	"HFish/core/protocol/redis"
-	"HFish/core/protocol/mysql"
-	"HFish/core/protocol/ftp"
-	"HFish/core/protocol/telnet"
-	"HFish/core/protocol/custom"
-	"HFish/core/rpc/server"
-	"HFish/core/rpc/client"
-	"HFish/view/api"
-	"HFish/utils/cors"
-	"HFish/core/protocol/memcache"
-	"HFish/core/protocol/tftp"
-	"HFish/core/protocol/httpx"
-	"HFish/core/protocol/elasticsearch"
-	"HFish/core/protocol/vnc"
 	"HFish/core/dbUtil"
-	"strconv"
+	"HFish/core/exec"
+	"HFish/core/protocol/custom"
+	"HFish/core/protocol/elasticsearch"
+	"HFish/core/protocol/ftp"
+	"HFish/core/protocol/httpx"
+	"HFish/core/protocol/memcache"
+	"HFish/core/protocol/mysql"
+	"HFish/core/protocol/redis"
+	"HFish/core/protocol/ssh"
+	"HFish/core/protocol/telnet"
+	"HFish/core/protocol/tftp"
+	"HFish/core/protocol/vnc"
+	"HFish/core/rpc/client"
+	"HFish/core/rpc/server"
+	"HFish/utils/cache"
+	"HFish/utils/color"
+	"HFish/utils/conf"
+	"HFish/utils/cors"
+	"HFish/utils/ping"
+	"HFish/view"
+	"HFish/view/api"
+	"fmt"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
+	"github.com/gin-gonic/gin"
+	"io"
+	"net/http"
+	"os"
+	"strconv"
 	"syscall"
-	"HFish/utils/ping"
+	"time"
 )
 
 func RunWeb(template string, index string, static string, url string) http.Handler {
@@ -150,7 +150,7 @@ func RunAdmin() http.Handler {
 }
 
 // 初始化缓存
-func initCahe() {
+func initCache() {
 	resultMail, _ := dbUtil.DB().Table("hfish_setting").Fields("status", "info").Where("type", "=", "alertMail").First()
 	resultHook, _ := dbUtil.DB().Table("hfish_setting").Fields("status", "info").Where("type", "=", "webHook").First()
 	resultIp, _ := dbUtil.DB().Table("hfish_setting").Fields("status", "info").Where("type", "=", "whiteIp").First()
@@ -389,7 +389,7 @@ func Run() {
 
 	//=========================//
 	// 初始化缓存
-	initCahe()
+	initCache()
 
 	// 启动 admin 管理后台
 	adminAddr := conf.Get("admin", "addr")

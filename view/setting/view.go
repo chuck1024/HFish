@@ -1,14 +1,14 @@
 package setting
 
 import (
-	"github.com/gin-gonic/gin"
-	"net/http"
 	"HFish/core/dbUtil"
-	"strings"
-	"time"
-	"HFish/utils/log"
 	"HFish/error"
 	"HFish/utils/cache"
+	"HFish/utils/log"
+	"github.com/gin-gonic/gin"
+	"net/http"
+	"strings"
+	"time"
 )
 
 func Html(c *gin.Context) {

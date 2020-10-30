@@ -1,8 +1,8 @@
 package json
 
 import (
-	"github.com/bitly/go-simplejson"
 	"HFish/utils/log"
+	"github.com/bitly/go-simplejson"
 	"io/ioutil"
 )
 

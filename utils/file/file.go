@@ -2,11 +2,11 @@ package file
 
 import (
 	"HFish/error"
-	"os"
-	"io/ioutil"
-	"HFish/utils/log"
 	"HFish/utils/json"
+	"HFish/utils/log"
 	"fmt"
+	"io/ioutil"
+	"os"
 )
 
 // 防止高并发下 打开过多
@@ -77,7 +77,7 @@ func ReadLibsText(typex string, name string) string {
 	case "ssh":
 		text, ok := sshMap[name]
 
-		if (ok) {
+		if ok {
 			return text
 		} else {
 			return sshMap["default"]
@@ -85,7 +85,7 @@ func ReadLibsText(typex string, name string) string {
 	case "telnet":
 		text, ok := telnetMap[name]
 
-		if (ok) {
+		if ok {
 			return text
 		} else {
 			return telnetMap["default"]

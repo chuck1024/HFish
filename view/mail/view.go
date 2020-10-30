@@ -1,14 +1,14 @@
 package mail
 
 import (
+	"HFish/core/dbUtil"
+	"HFish/error"
+	"HFish/utils/log"
+	"HFish/utils/send"
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"strings"
-	"HFish/core/dbUtil"
-	"HFish/utils/send"
-	"HFish/error"
 	"strconv"
-	"HFish/utils/log"
+	"strings"
 )
 
 func Html(c *gin.Context) {

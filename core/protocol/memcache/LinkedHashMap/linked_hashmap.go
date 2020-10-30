@@ -19,7 +19,7 @@ func NewLinkedHashMap() *LinkedHashMap {
 	return &LinkedHashMap{
 		linklist: NewLinkList(),
 		hashmap:  make(map[string]interface{}),
-		mutex: &sync.RWMutex{},
+		mutex:    &sync.RWMutex{},
 	}
 }
 
@@ -66,7 +66,6 @@ func (this *LinkedHashMap) Get(key string) interface{} {
 func (this *LinkedHashMap) Len() int {
 	return len(this.hashmap)
 }
-
 
 func (this *LinkedHashMap) Remove(key string) (bool, interface{}) {
 	originLinkedHashMapNode, isExists := this.hashmap[key]

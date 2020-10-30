@@ -1,8 +1,8 @@
 package pool
 
 import (
-	"sync"
 	"github.com/panjf2000/ants"
+	"sync"
 )
 
 func New(size int) (sync.WaitGroup, *ants.Pool) {

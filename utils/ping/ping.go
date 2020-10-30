@@ -1,9 +1,9 @@
 package ping
 
 import (
-	"net/http"
-	"HFish/utils/try"
 	"HFish/utils/conf"
+	"HFish/utils/try"
+	"net/http"
 )
 
 func Ping() {

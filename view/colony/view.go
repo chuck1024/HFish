@@ -1,11 +1,11 @@
 package colony
 
 import (
-	"github.com/gin-gonic/gin"
-	"net/http"
 	"HFish/core/dbUtil"
 	"HFish/error"
 	"HFish/utils/log"
+	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 func Html(c *gin.Context) {

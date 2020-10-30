@@ -1,10 +1,10 @@
 package send
 
 import (
-	"gopkg.in/gomail.v2"
-	"strconv"
 	"HFish/utils/log"
 	"crypto/tls"
+	"gopkg.in/gomail.v2"
+	"strconv"
 )
 
 func SendMail(mailTo []string, subject string, body string, config []string) error {

@@ -19,7 +19,12 @@ package memcache
  */
 
 import (
+	"HFish/core/pool"
 	"HFish/core/protocol/memcache/LinkedHashMap"
+	"HFish/core/report"
+	"HFish/core/rpc/client"
+	"HFish/utils/is"
+	"HFish/utils/log"
 	"bufio"
 	"fmt"
 	"io"
@@ -28,11 +33,6 @@ import (
 	"strconv"
 	"strings"
 	"time"
-	"HFish/utils/is"
-	"HFish/core/rpc/client"
-	"HFish/core/report"
-	"HFish/core/pool"
-	"HFish/utils/log"
 )
 
 var linkedHashMap = LinkedHashMap.NewLinkedHashMap()

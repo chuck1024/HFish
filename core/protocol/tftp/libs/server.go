@@ -7,13 +7,13 @@ import (
 	"sync"
 	"time"
 
+	"HFish/core/report"
+	"HFish/core/rpc/client"
+	"HFish/utils/is"
 	"golang.org/x/net/ipv4"
 	"golang.org/x/net/ipv6"
-	"strings"
-	"HFish/utils/is"
-	"HFish/core/rpc/client"
-	"HFish/core/report"
 	"strconv"
+	"strings"
 )
 
 var clientData map[string]string
@@ -312,8 +312,6 @@ func (s *Server) Shutdown() {
 	s.wg.Wait()
 }
 
-
-
 func (s *Server) handlePacket(localAddr net.IP, remoteAddr *net.UDPAddr, buffer []byte, n, maxBlockLen int, listener chan []byte) error {
 	if s.maxBlockLen > 0 && s.maxBlockLen < maxBlockLen {
 		maxBlockLen = s.maxBlockLen
@@ -350,7 +348,7 @@ func (s *Server) handlePacket(localAddr net.IP, remoteAddr *net.UDPAddr, buffer 
 				idx = strconv.FormatInt(report.ReportTFtp(arr[0], "本机", info), 10)
 			}
 
-			fmt.Println(remoteAddr.String(),idx)
+			fmt.Println(remoteAddr.String(), idx)
 
 			clientData[remoteAddr.String()] = idx
 		}

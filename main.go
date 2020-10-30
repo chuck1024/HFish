@@ -1,8 +1,8 @@
 package main
 
 import (
-	"fmt"
 	"HFish/utils/setting"
+	"fmt"
 	"os"
 )
 

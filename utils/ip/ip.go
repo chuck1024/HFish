@@ -1,16 +1,16 @@
 package ip
 
 import (
-	"net/http"
-	"io/ioutil"
+	"HFish/utils/log"
+	"HFish/utils/try"
+	"fmt"
 	"github.com/axgle/mahonia"
+	"github.com/ipipdotnet/ipdb-go"
+	"io/ioutil"
+	"net"
+	"net/http"
 	"regexp"
 	"strings"
-	"net"
-	"fmt"
-	"HFish/utils/try"
-	"HFish/utils/log"
-	"github.com/ipipdotnet/ipdb-go"
 )
 
 var ipipDB *ipdb.City

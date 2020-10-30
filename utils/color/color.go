@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	TextBlack   = iota + 30
+	TextBlack = iota + 30
 	TextRed
 	TextGreen
 	TextYellow

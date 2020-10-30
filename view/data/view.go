@@ -1,15 +1,15 @@
 package data
 
 import (
+	"HFish/core/dbUtil"
+	"HFish/error"
+	"HFish/utils/conf"
+	"HFish/utils/log"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 	"net/http"
-	"fmt"
-	"HFish/core/dbUtil"
 	"strconv"
-	"HFish/utils/log"
-	"HFish/error"
-	"HFish/utils/conf"
 )
 
 func Html(c *gin.Context) {

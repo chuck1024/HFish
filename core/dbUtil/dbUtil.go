@@ -1,11 +1,11 @@
 package dbUtil
 
 import (
-	_ "github.com/go-sql-driver/mysql"
-	_ "github.com/mattn/go-sqlite3"
 	"HFish/utils/conf"
 	"HFish/utils/log"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/gohouse/gorose"
+	_ "github.com/mattn/go-sqlite3"
 )
 
 var engin *gorose.Engin
